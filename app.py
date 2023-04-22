@@ -101,6 +101,6 @@ demo = gr.Interface(fn=ChatGPT, inputs=["textbox"], outputs=[gr.outputs.Textbox(
 
 CUSTOM_PATH = os.getenv('CUSTOM_PATH')
 app = FastAPI()
-app = gr.mount_gradio_app(app, demo, path="")
+app = gr.mount_gradio_app(app, demo, path=CUSTOM_PATH)
 
 ## demo.launch()
