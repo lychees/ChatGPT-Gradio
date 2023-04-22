@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 import os
-os.system('pip install openai')
-# os.system('pip install transformers')
 import openai
 import gradio as gr
 # from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
@@ -15,20 +13,6 @@ openai.api_key = "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"
 # open ended conversation
 start_sequence = "\nAI: "
 restart_sequence = "\nHuman: "
-"""
-# generate prompt
-tokenizer = AutoTokenizer.from_pretrained("merve/chatgpt-prompts-bart-long")
-model = AutoModelForSeq2SeqLM.from_pretrained("merve/chatgpt-prompts-bart-long", from_tf=True)
-
-def generate(prompt):
-    batch = tokenizer(prompt, return_tensors="pt")
-    generated_ids = model.generate(batch["input_ids"], max_new_tokens=150)
-    output = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
-    return output[0]
-
-examples = [["photographer"], ["developer"]]
-ans = generate(examples[0][0])
-"""
 
 def Role_Settings(default_setting=""):
     if default_setting == "":
@@ -93,14 +77,10 @@ article = "<p style='text-align: center'><a href='https://github.com/lychees/Cha
           "Repo</a></p> "
 examples = [["请问今天晚上吃什么呢？"]]
 demo = gr.Interface(fn=ChatGPT, inputs=["textbox"], outputs=[gr.outputs.Textbox(label="Completions")],
-                  title=title, description=description, article=article, examples=examples,
-                  allow_flagging=False, allow_screenshot=False)
-
-
-
+                  title=title, description=description, article=article, examples=examples)
 
 CUSTOM_PATH = os.getenv('CUSTOM_PATH')
 app = FastAPI()
 app = gr.mount_gradio_app(app, demo, path=CUSTOM_PATH)
 
-## demo.launch()
+# demo.launch()
