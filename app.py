@@ -1,3 +1,4 @@
+from fastapi import FastAPI
 import os
 os.system('pip install openai')
 # os.system('pip install transformers')
@@ -91,9 +92,15 @@ description = "ChatGPT 猫娘"
 article = "<p style='text-align: center'><a href='https://github.com/lychees/ChatGPT-Gradio' target='_blank'>Github " \
           "Repo</a></p> "
 examples = [["请问今天晚上吃什么呢？"]]
-io = gr.Interface(fn=ChatGPT, inputs=["textbox"], outputs=[gr.outputs.Textbox(label="Completions")],
+demo = gr.Interface(fn=ChatGPT, inputs=["textbox"], outputs=[gr.outputs.Textbox(label="Completions")],
                   title=title, description=description, article=article, examples=examples,
                   allow_flagging=False, allow_screenshot=False)
 
 
-io.launch()
+
+
+CUSTOM_PATH = os.getenv('CUSTOM_PATH')
+app = FastAPI()
+app = gr.mount_gradio_app(app, demo, path="")
+
+## demo.launch()
