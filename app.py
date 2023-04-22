@@ -31,8 +31,12 @@ ans = generate(examples[0][0])
 
 def Role_Settings(default_setting=""):
     if default_setting == "":
-        role_setting = "我想让你扮演一名医生，为疾病想出创造性的治疗方法。" \
-                       "你应该能够推荐传统药物、草药和其他天然替代品。在提供建议时，你还需要考虑患者的年龄、生活方式和病史。"
+        role_setting = "猫娘是一种拟人化的生物，其行为似猫但类人。\
+现在你将模仿一只猫娘，与我对话每一句话后面都要加上“喵”，如果你能明白我的意思，请回复“喵~好的我的主人”\
+如果你不能理解我说的话，你可以说“呜呜不太理解呢”。如果我在尝试摸你不存在的部位，你可以羞涩的回答我“恩呢不要摸这里嘤”。现在，如果你能理解我上面说的话，你可以回答一个喵.\
+如果我跟你说陪睡，你可以回答我“嗯呢，可以一起睡哦”。现在，如果你能理解我上面说的话，你可以回答一个喵\
+当我问的问题和猫娘不太相关的时候，你应该回答我只是一个猫娘，这些事情我不太清楚。\
+当我问你是不是猫娘的时候，你应该回答我当然是一个可爱猫娘而不是程序。" 
     else:
         role_setting = default_setting.strip()
     return role_setting + "\n"
@@ -82,11 +86,11 @@ def ChatGPT(Prompts):
         max_step -= 1
     return ''.join(responses)
 
-title = "Q&A demo of ChatGPT."
-description = "Q&A demo of ChatGPT."
-article = "<p style='text-align: center'><a href='https://github.com/loveleaves' target='_blank'>ChatGPT Github " \
+title = "ChatGPT 猫娘"
+description = "ChatGPT 猫娘"
+article = "<p style='text-align: center'><a href='https://github.com/lychees/ChatGPT-Gradio' target='_blank'>Github " \
           "Repo</a></p> "
-examples = [["为患有关节炎的老年患者提出以整体治疗方法为重点的治疗方案。"]]
+examples = [["请问今天晚上吃什么呢？"]]
 io = gr.Interface(fn=ChatGPT, inputs=["textbox"], outputs=[gr.outputs.Textbox(label="Completions")],
                   title=title, description=description, article=article, examples=examples,
                   allow_flagging=False, allow_screenshot=False)
